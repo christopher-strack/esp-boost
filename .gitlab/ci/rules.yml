@@ -73,6 +73,14 @@
 .patterns-test_apps_assign_test: &patterns-test_apps_assign_test
   - "test_apps/assign/test/**/*"
 
+# test_apps bimap example files
+.patterns-test_apps_bimap_example: &patterns-test_apps_bimap_example
+  - "test_apps/bimap/example/**/*"
+
+# test_apps bimap test files
+.patterns-test_apps_bimap_test: &patterns-test_apps_bimap_test
+  - "test_apps/bimap/test/**/*"
+
 ##############
 # if anchors #
 ##############
@@ -318,3 +326,36 @@
       changes: *patterns-test_apps_common
     - <<: *if-dev-push
       changes: *patterns-test_apps_assign_test
+
+
+# rules for test_apps bimap example
+.rules:build:test_apps_bimap_example:
+  rules:
+    - <<: *if-protected
+    - <<: *if-label-build
+    - <<: *if-label-target_test
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-build_system
+    - <<: *if-dev-push
+      changes: *patterns-component
+    - <<: *if-dev-push
+      changes: *patterns-test_apps_common
+    - <<: *if-dev-push
+      changes: *patterns-test_apps_bimap_example
+
+# rules for test_apps bimap test
+.rules:build:test_apps_bimap_test:
+  rules:
+    - <<: *if-protected
+    - <<: *if-label-build
+    - <<: *if-label-target_test
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-build_system
+    - <<: *if-dev-push
+      changes: *patterns-component
+    - <<: *if-dev-push
+      changes: *patterns-test_apps_common
+    - <<: *if-dev-push
+      changes: *patterns-test_apps_bimap_test

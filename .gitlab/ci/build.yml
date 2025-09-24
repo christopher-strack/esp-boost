@@ -194,3 +194,23 @@ build_test_apps_assign_test:
     - .rules:build:test_apps_assign_test
   variables:
     EXAMPLE_DIR: test_apps/assign/test
+
+#
+# Test apps: bimap
+#
+# example
+build_test_apps_bimap_example:
+  extends:
+    - .build_examples_template
+    - .build_general_idf_release_image
+    - .rules:build:test_apps_bimap_example
+  variables:
+    EXAMPLE_DIR: test_apps/bimap/example
+# test
+build_test_apps_bimap_test:
+  extends:
+    - .build_examples_template
+    - .build_general_idf_release_image
+    - .rules:build:test_apps_bimap_test
+  variables:
+    EXAMPLE_DIR: test_apps/bimap/test

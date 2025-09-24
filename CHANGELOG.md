@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v0.4.3 - 2025-12-2
+
+### Enhancements:
+
+* feat(libs): support bimap
+* feat(test_apps): update examples and test cases for bimap
+
 ## v0.4.2 - 2025-12-1
 
 ### Enhancements:
