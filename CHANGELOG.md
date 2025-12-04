@@ -1,18 +1,15 @@
 # ChangeLog
 
-## v0.4.3 - 2025-12-2
-
-### Enhancements:
-
-* feat(libs): support bimap
-* feat(test_apps): update examples and test cases for bimap
-
-## v0.4.2 - 2025-12-1
+## v0.4.2 - 2025-12-5
 
 ### Enhancements:
 
 * feat(libs): support assign
+* feat(libs): support bimap
+* feat(config): avoid TLS compatibility issue with boost::asio on ESP32-P4 (RISC-V)
 * feat(test_apps): update test cases for assign
+* feat(test_apps): update examples and test cases for bimap
+* feat(tools): update run_test_apps.py
 
 ## v0.4.1 - 2025-10-30
 
