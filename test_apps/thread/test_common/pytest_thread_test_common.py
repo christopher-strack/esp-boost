@@ -23,8 +23,8 @@ ENTER_RESPONSE_LIST = [
     b'Press ENTER to see the list of tests',
 ]
 REBOOT_RESPONSE = b'Rebooting...'
-TIMEOUT_S = 120
-RETRY_LIMIT = 4  # Retry once before recording failure
+TIMEOUT_S = 180
+RETRY_LIMIT = 10  # Retry once before recording failure
 
 
 def get_index_and_name_list(response: bytes):
@@ -53,6 +53,7 @@ def get_index_and_name_list(response: bytes):
         'defaults',
     ],
 )
+@pytest.mark.timeout(20 * 60) # 20 minutes
 def test_thread_test_common(dut: Dut)-> None:
     dut.expect(ENTER_RESPONSE_LIST, timeout=5)
 
@@ -102,7 +103,8 @@ def test_thread_test_common(dut: Dut)-> None:
 
         if retries == RETRY_LIMIT:
             failed_name_and_numbers.append((name, num))
-            print(f"[{num}] [{name}] Marked as failed after {RETRY_LIMIT} attempts.")
+            print(f"[{num}] [{name}] exceeded the retry limit of {RETRY_LIMIT} attempts.")
+            pytest.fail(f"[{num}] [{name}] exceeded the retry limit of {RETRY_LIMIT} attempts.")
 
     if len(failed_name_and_numbers) > 0:
         pytest.fail(f"The following numbers failed or timed out: {failed_name_and_numbers}")

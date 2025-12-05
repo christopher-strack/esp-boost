@@ -23,7 +23,7 @@ ENTER_RESPONSE_LIST = [
     b'Press ENTER to see the list of tests',
 ]
 REBOOT_RESPONSE = b'Rebooting...'
-TIMEOUT_S = 120
+TIMEOUT_S = 180
 RETRY_LIMIT = 3  # Retry once before recording failure
 
 

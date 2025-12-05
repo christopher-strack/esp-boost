@@ -341,4 +341,5 @@ BOOST_AUTO_TEST_CASE(future_when_all)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    vTaskDelay(pdMS_TO_TICKS(2000));
 }

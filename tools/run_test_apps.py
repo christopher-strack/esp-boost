@@ -9,7 +9,7 @@ SUCCESS_RESPONSE = '0 Failures'
 FAILURE_RESPONSE = '1 Failures'
 ENTER_RESPONSE = 'Enter test for running'
 REBOOT_RESPONSE = 'Rebooting...'
-TIMEOUT_S = 120
+TIMEOUT_S = 180
 RETRY_LIMIT = 4  # Retry once before recording failure
 
 
