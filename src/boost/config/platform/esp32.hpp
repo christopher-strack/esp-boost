@@ -25,6 +25,11 @@
 #define BOOST_ASIO_DISABLE_BOOST_CONTEXT_FIBER
 #define BOOST_ASIO_DISABLE_IOCP
 #define BOOST_ASIO_DISABLE_SERIAL_PORT
+// Avoid TLS compatibility issue on ESP32-P4 (RISC-V)
+#if CONFIG_IDF_TARGET_ARCH_RISCV
+#   define BOOST_ASIO_DISABLE_THREAD_KEYWORD_EXTENSION
+#   define BOOST_ASIO_DISABLE_SMALL_BLOCK_RECYCLING
+#endif
 
 # define SA_RESTART   0x10000000 /* Restart syscall on signal return.  */
 #define SA_NOCLDWAIT  2		 /* Don't create zombie on child death.  */
