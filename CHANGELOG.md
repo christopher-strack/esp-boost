@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v0.4.2 - 2025-12-1
+
+### Enhancements:
+
+* feat(libs): support assign
+* feat(test_apps): update test cases for assign
+
 ## v0.4.1 - 2025-10-30
 
 ### Bugfixes:

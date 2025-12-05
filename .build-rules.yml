@@ -38,3 +38,8 @@ test_apps/format:
 test_apps/algorithm:
   enable:
     - if: INCLUDE_DEFAULT == 1
+
+# assign
+test_apps/assign:
+  enable:
+    - if: INCLUDE_DEFAULT == 1

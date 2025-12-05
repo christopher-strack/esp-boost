@@ -182,3 +182,15 @@ build_test_apps_algorithm_test:
     - .rules:build:test_apps_algorithm_test
   variables:
     EXAMPLE_DIR: test_apps/algorithm/test
+
+#
+# Test apps: assign
+#
+# test
+build_test_apps_assign_test:
+  extends:
+    - .build_examples_template
+    - .build_general_idf_release_image
+    - .rules:build:test_apps_assign_test
+  variables:
+    EXAMPLE_DIR: test_apps/assign/test

@@ -69,6 +69,10 @@
 .patterns-test_apps_algorithm_test: &patterns-test_apps_algorithm_test
   - "test_apps/algorithm/test/**/*"
 
+# test_apps assign test files
+.patterns-test_apps_assign_test: &patterns-test_apps_assign_test
+  - "test_apps/assign/test/**/*"
+
 ##############
 # if anchors #
 ##############
@@ -298,3 +302,19 @@
       changes: *patterns-test_apps_common
     - <<: *if-dev-push
       changes: *patterns-test_apps_algorithm_test
+
+# rules for test_apps assign test
+.rules:build:test_apps_assign_test:
+  rules:
+    - <<: *if-protected
+    - <<: *if-label-build
+    - <<: *if-label-target_test
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-build_system
+    - <<: *if-dev-push
+      changes: *patterns-component
+    - <<: *if-dev-push
+      changes: *patterns-test_apps_common
+    - <<: *if-dev-push
+      changes: *patterns-test_apps_assign_test
