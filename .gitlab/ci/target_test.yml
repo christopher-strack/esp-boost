@@ -325,3 +325,45 @@ components_test_assign_test:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/assign/test
     TEST_ENV: ${ENV_TAG}
+
+#
+# Test apps: bimap
+#
+# example
+components_test_bimap_example:
+  extends:
+    - .pytest_template
+    - .rules:build:test_apps_bimap_example
+  needs:
+    - job: "build_test_apps_bimap_example"
+      artifacts: true
+      optional: true
+  parallel:
+    matrix: *idf_target_version_matrix
+  tags:
+    - ${IDF_TARGET}
+    - ${ENV_TAG}
+  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  variables:
+    TEST_TARGET: ${IDF_TARGET}
+    TEST_FOLDER: test_apps/bimap/example
+    TEST_ENV: ${ENV_TAG}
+# test
+components_test_bimap_test:
+  extends:
+    - .pytest_template
+    - .rules:build:test_apps_bimap_test
+  needs:
+    - job: "build_test_apps_bimap_test"
+      artifacts: true
+      optional: true
+  parallel:
+    matrix: *idf_target_version_matrix
+  tags:
+    - ${IDF_TARGET}
+    - ${ENV_TAG}
+  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  variables:
+    TEST_TARGET: ${IDF_TARGET}
+    TEST_FOLDER: test_apps/bimap/test
+    TEST_ENV: ${ENV_TAG}

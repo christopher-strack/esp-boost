@@ -43,3 +43,8 @@ test_apps/algorithm:
 test_apps/assign:
   enable:
     - if: INCLUDE_DEFAULT == 1
+
+# bimap
+test_apps/bimap:
+  enable:
+    - if: INCLUDE_DEFAULT == 1

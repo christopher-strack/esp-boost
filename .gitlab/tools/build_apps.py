@@ -22,6 +22,7 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent.absolute()
 APPS_BUILD_PER_JOB = 30
 IGNORE_WARNINGS = [
     r'.+MultiCommand.+',
+    r'.+deprecated-copy.+',
 ]
 
 
