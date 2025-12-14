@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.4.3 - 2025-12-14
+
+### Compatibility Changes:
+
+* chore(libs): remove boost.atomic from supported libraries list
+
 ## v0.4.2 - 2025-12-5
 
 ### Enhancements:
