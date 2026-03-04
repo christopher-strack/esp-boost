@@ -10,3 +10,5 @@
 extern unsigned throw_one;
 
 void common_init();
+void common_set_pthread_config(int stack, bool is_inherit);
+void common_delay(uint32_t seconds = 0);

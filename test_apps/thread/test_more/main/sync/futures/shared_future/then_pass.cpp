@@ -161,5 +161,8 @@ BOOST_AUTO_TEST_CASE(sync/futures/shared_future, then_pass)
     common_init();
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
+        /* esp32: delay to avoid "memory leak" error */
+        boost::this_thread::sleep_for(boost::chrono::seconds(2));
     }).join();
+    common_delay();
 }

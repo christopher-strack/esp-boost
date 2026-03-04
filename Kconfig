@@ -1,5 +1,4 @@
 menu "ESP Boost Configuration"
-
     config BOOST_CXX_FEATURE_ENABLED
         bool
         select COMPILER_CXX_EXCEPTIONS
@@ -17,7 +16,7 @@ menu "ESP Boost Configuration"
 
     config BOOST_CHRONO_ENABLED
         bool "Enable Boost Chrono library"
-        default y
+        default n
         select BOOST_SYSTEM_ENABLED
         help
             Enable the Boost.Chrono library. Requires Boost.System.
@@ -82,7 +81,7 @@ menu "ESP Boost Configuration"
 
     config BOOST_SYSTEM_ENABLED
         bool "Enable Boost System library"
-        default y
+        default n
         help
             Enable the Boost.System library (error_code, system_category).
 
@@ -95,10 +94,9 @@ menu "ESP Boost Configuration"
 
     config BOOST_THREAD_ENABLED
         bool "Enable Boost Thread library"
-        default y
+        default n
         select BOOST_CHRONO_ENABLED
         select BOOST_SYSTEM_ENABLED
         help
             Enable the Boost.Thread library. Requires Boost.Chrono and Boost.System.
-
 endmenu

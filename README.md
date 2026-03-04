@@ -6,7 +6,7 @@
 
 ## Overview
 
-esp-boost is a C++ library ported by Espressif based on [Boost](https://github.com/boostorg/boost), designed for developing C++ applications on ESP series SoCs (ESP32, ESP32-S3, ESP32-P4, etc.).
+esp-boost is a C++ library ported by Espressif based on [Boost](https://github.com/boostorg/boost), designed for developing C++ applications on ESP series SoCs (ESP32-C5, ESP32-S3, ESP32-P4, etc.).
 
 > [!NOTE]
 > - esp-boost is ported from the official Boost library version `1.87.0`.
@@ -34,7 +34,7 @@ Before using this library, please ensure you have installed the SDK that meets t
 
 |                     **SDK**                     | **Version Required** |
 | ----------------------------------------------- | -------------------- |
-| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.3               |
+| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5,<6.0          |
 
 > [!NOTE]
 > * For SDK installation, please refer to [ESP-IDF Programming Guide - Installation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#get-started-how-to-get-esp-idf)

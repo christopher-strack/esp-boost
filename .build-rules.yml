@@ -3,48 +3,18 @@
 #    *  A == 1 or (B == 2 and C in [1,2,3])
 #    *  (A == 1 and B == 2) or (C not in ["3", "4", 5])
 
+# Common enable rule
+.default_enable: &default_enable
+  enable:
+    - if: IDF_TARGET in ["esp32s3", "esp32p4", "esp32c5"]
+
 # Test apps
-# signals2
-test_apps/signals2:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# thread
-test_apps/thread:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# graph
-test_apps/graph:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# array
-test_apps/array:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# align
-test_apps/align:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# format
-test_apps/format:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# algorithm
-test_apps/algorithm:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# assign
-test_apps/assign:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
-
-# bimap
-test_apps/bimap:
-  enable:
-    - if: INCLUDE_DEFAULT == 1
+test_apps/signals2: *default_enable  # signals2
+test_apps/thread: *default_enable  # thread
+test_apps/graph: *default_enable  # graph
+test_apps/array: *default_enable  # array
+test_apps/align: *default_enable  # align
+test_apps/format: *default_enable  # format
+test_apps/algorithm: *default_enable  # algorithm
+test_apps/assign: *default_enable  # assign
+test_apps/bimap: *default_enable  # bimap

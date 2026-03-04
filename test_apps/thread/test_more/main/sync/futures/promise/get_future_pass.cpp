@@ -70,4 +70,5 @@ BOOST_AUTO_TEST_CASE(sync/futures/promise, get_future_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

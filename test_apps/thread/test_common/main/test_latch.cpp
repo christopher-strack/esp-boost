@@ -13,36 +13,30 @@
 #include <boost/detail/lightweight_test.hpp>
 #include <vector>
 
-namespace
+void test_latch()
 {
-
   // Shared variables for generation latch test
   const int N_THREADS = 10;
   boost::latch gen_latch(N_THREADS);
   boost::mutex mutex;
   long global_parameter;
 
-  void latch_thread()
-  {
+  auto latch_thread = [&]() {
     {
       boost::unique_lock<boost::mutex> lock(mutex);
       global_parameter++;
     }
     gen_latch.count_down();
     //do something else
-  }
+  };
 
-} // namespace
-
-void test_latch()
-{
   boost::thread_group g;
   global_parameter = 0;
 
   try
   {
     for (int i = 0; i < N_THREADS; ++i)
-      g.create_thread(&latch_thread);
+      g.create_thread(latch_thread);
 
     if (! gen_latch.try_wait())
       if (gen_latch.wait_for(boost::chrono::milliseconds(100)) ==  boost::cv_status::timeout)
@@ -76,4 +70,5 @@ BOOST_AUTO_TEST_CASE(test_latch)
   std::thread([](){
     TEST_ASSERT(test_main() == 0);
   }).join();
+  common_delay();
 }

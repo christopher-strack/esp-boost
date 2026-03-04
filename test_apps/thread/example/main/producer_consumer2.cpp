@@ -161,4 +161,5 @@ BOOST_AUTO_TEST_CASE(producer_consumer2)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

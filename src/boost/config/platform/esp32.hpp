@@ -51,6 +51,10 @@
 #define BOOST_THREAD_INTERNAL_CLOCK_DONT_USE_MONO
 // Enable this macro to avoid an assert when recursive_mutex calls pthread_get_id()
 #define BOOST_THREAD_HAS_PTHREAD_MUTEXATTR_SETTYPE
+// Avoid `get_future()` exception in `test_9711`
+#if !defined(BOOST_THREAD_DONT_PROVIDE_PROMISE_LAZY) && !defined(BOOST_THREAD_PROVIDES_PROMISE_LAZY)
+#   define BOOST_THREAD_DONT_PROVIDE_PROMISE_LAZY
+#endif
 
 /**
  * lib: unordered

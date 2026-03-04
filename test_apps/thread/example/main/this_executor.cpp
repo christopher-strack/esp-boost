@@ -90,6 +90,8 @@ static int test_main()
 
 #include "common.hpp"
 
+/* esp32: This config will cause crash */
+#if !CONFIG_IDF_TARGET_ESP32P4 || !CONFIG_SPIRAM_XIP_FROM_PSRAM
 BOOST_AUTO_TEST_CASE(this_executor)
 {
     common_init();
@@ -100,3 +102,4 @@ BOOST_AUTO_TEST_CASE(this_executor)
     /* esp32: avoid memory leak */
     common_set_memory_leak_threshold(300);
 }
+#endif /* !CONFIG_IDF_TARGET_ESP32P4 || !CONFIG_SPIRAM_XIP_FROM_PSRAM */

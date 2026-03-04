@@ -113,6 +113,7 @@ BOOST_AUTO_TEST_CASE(test_lock_two_other_thread_locks_in_order)
 
         t.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_lock_two_other_thread_locks_in_opposite_order)
@@ -134,6 +135,7 @@ BOOST_AUTO_TEST_CASE(test_lock_two_other_thread_locks_in_opposite_order)
 
         t.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_lock_five_uncontended)
@@ -206,6 +208,7 @@ BOOST_AUTO_TEST_CASE(test_lock_five_other_thread_locks_in_order)
 
         t.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_lock_five_other_thread_locks_in_different_order)
@@ -227,6 +230,7 @@ BOOST_AUTO_TEST_CASE(test_lock_five_other_thread_locks_in_different_order)
 
         t.join();
     }).join();
+    common_delay();
 }
 
 void lock_n(boost::mutex* mutexes,unsigned count)
@@ -260,6 +264,7 @@ BOOST_AUTO_TEST_CASE(test_lock_ten_other_thread_locks_in_different_order)
 
         t.join();
     }).join();
+    common_delay();
 }
 
 struct dummy_mutex

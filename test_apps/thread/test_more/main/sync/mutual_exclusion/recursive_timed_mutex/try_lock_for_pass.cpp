@@ -97,4 +97,5 @@ BOOST_AUTO_TEST_CASE(sync/mutual_exclusion/recursive_timed_mutex, try_lock_for_p
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

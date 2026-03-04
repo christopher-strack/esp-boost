@@ -18,17 +18,14 @@
       - "**/build*/size.json"
       - "**/build*/build_log.txt"
       - "**/build*/*.bin"
-      # upload to s3 server to save the artifacts size
       - "**/build*/*.map"
-      # ELF files are too large, so they are not uploaded
-      # - "**/build*/*.elf"
+      - "**/build*/*.elf"
       - "**/build*/flasher_args.json"
       - "**/build*/flash_args"
       - "**/build*/flash_project_args"
       - "**/build*/config/sdkconfig.json"
       - "**/build*/bootloader/*.bin"
-      # ELF files are too large, so they are not uploaded
-      # - "**/build*/bootloader/*.elf"
+      - "**/build*/bootloader/*.elf"
       - "**/build*/partition_table/*.bin"
       - "**/build*/mmap_build/*.bin"
       - "**/build*/**/*.bin"
@@ -38,25 +35,50 @@
     IDF_CI_BUILD: "1"
     # By configuring this macro, you can append the compiled configuration file.
     # For example, using "sdkconf.etc=default" specifies the default sdkconfig file.
-    EXAMPLE_CONFIG: "="
+    EXAMPLE_CONFIG: "sdkconfig.defaults=defaults;sdkconfig.ci.*=;=defaults"
+    EXAMPLE_TARGET: "all"
   script:
     - pip install "idf-component-manager"
     - pip install idf_build_apps
-    - python .gitlab/tools/build_apps.py ${EXAMPLE_DIR} --config ${EXAMPLE_CONFIG} -t all -vv
+    - python .gitlab/tools/build_apps.py ${EXAMPLE_DIR} --config ${EXAMPLE_CONFIG} -t ${EXAMPLE_TARGET} -vv
 
-#  Images for different target ESP-IDF
-.build_general_idf_release_image:
+.build_examples_template_without_large_artifacts: &build_examples_template_without_large_artifacts
+  <<: *build_template
+  artifacts:
+    when: always
+    paths:
+      - "**/build*/size.json"
+      - "**/build*/build_log.txt"
+      - "**/build*/*.bin"
+      # Too large, temporarily not uploaded
+      # - "**/build*/*.map"
+      # - "**/build*/*.elf"
+      - "**/build*/flasher_args.json"
+      - "**/build*/flash_args"
+      - "**/build*/flash_project_args"
+      - "**/build*/config/sdkconfig.json"
+      - "**/build*/bootloader/*.bin"
+      - "**/build*/bootloader/*.elf"
+      - "**/build*/partition_table/*.bin"
+      - "**/build*/mmap_build/*.bin"
+      - "**/build*/**/*.bin"
+      - size_info.txt
+    expire_in: 1 week
+  variables:
+    IDF_CI_BUILD: "1"
+    # By configuring this macro, you can append the compiled configuration file.
+    # For example, using "sdkconf.etc=default" specifies the default sdkconfig file.
+    EXAMPLE_CONFIG: "sdkconfig.defaults=defaults;sdkconfig.ci.*=;=defaults"
+    EXAMPLE_TARGET: "all"
+  script:
+    - pip install "idf-component-manager"
+    - pip install idf_build_apps
+    - python .gitlab/tools/build_apps.py ${EXAMPLE_DIR} --config ${EXAMPLE_CONFIG} -t ${EXAMPLE_TARGET} -vv
+
+# Target ESP-IDF versions
+.build_general_idf_release_version:
   parallel:
     matrix:
-      - IMAGE: espressif/idf:release-v5.3
-      - IMAGE: espressif/idf:release-v5.4
-      - IMAGE: espressif/idf:release-v5.5
-
-.build_esp32_p4_idf_release_image:
-  parallel:
-    matrix:
-      - IMAGE: espressif/idf:release-v5.3
-      - IMAGE: espressif/idf:release-v5.4
       - IMAGE: espressif/idf:release-v5.5
 
 #
@@ -66,7 +88,7 @@
 build_test_apps_signals2_example:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_signals2_example
   variables:
     EXAMPLE_DIR: test_apps/signals2/example
@@ -74,7 +96,7 @@ build_test_apps_signals2_example:
 build_test_apps_signals2_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_signals2_test
   variables:
     EXAMPLE_DIR: test_apps/signals2/test
@@ -86,23 +108,23 @@ build_test_apps_signals2_test:
 build_test_apps_thread_example:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_thread_example
   variables:
     EXAMPLE_DIR: test_apps/thread/example
 # test_common
 build_test_apps_thread_test_common:
   extends:
-    - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_examples_template_without_large_artifacts
+    - .build_general_idf_release_version
     - .rules:build:test_apps_thread_test_common
   variables:
     EXAMPLE_DIR: test_apps/thread/test_common
 # test_more
 build_test_apps_thread_test_more:
   extends:
-    - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_examples_template_without_large_artifacts
+    - .build_general_idf_release_version
     - .rules:build:test_apps_thread_test_more
   variables:
     EXAMPLE_DIR: test_apps/thread/test_more
@@ -114,7 +136,7 @@ build_test_apps_thread_test_more:
 build_test_apps_graph_example:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_graph_example
   variables:
     EXAMPLE_DIR: test_apps/graph/example
@@ -126,7 +148,7 @@ build_test_apps_graph_example:
 build_test_apps_array_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_array_test
   variables:
     EXAMPLE_DIR: test_apps/array/test
@@ -138,7 +160,7 @@ build_test_apps_array_test:
 build_test_apps_align_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_align_test
   variables:
     EXAMPLE_DIR: test_apps/align/test
@@ -150,7 +172,7 @@ build_test_apps_align_test:
 build_test_apps_format_example:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_format_example
   variables:
     EXAMPLE_DIR: test_apps/format/example
@@ -158,7 +180,7 @@ build_test_apps_format_example:
 build_test_apps_format_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_format_test
   variables:
     EXAMPLE_DIR: test_apps/format/test
@@ -170,7 +192,7 @@ build_test_apps_format_test:
 build_test_apps_algorithm_example:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_algorithm_example
   variables:
     EXAMPLE_DIR: test_apps/algorithm/example
@@ -178,7 +200,7 @@ build_test_apps_algorithm_example:
 build_test_apps_algorithm_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_algorithm_test
   variables:
     EXAMPLE_DIR: test_apps/algorithm/test
@@ -190,7 +212,7 @@ build_test_apps_algorithm_test:
 build_test_apps_assign_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_assign_test
   variables:
     EXAMPLE_DIR: test_apps/assign/test
@@ -202,7 +224,7 @@ build_test_apps_assign_test:
 build_test_apps_bimap_example:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_bimap_example
   variables:
     EXAMPLE_DIR: test_apps/bimap/example
@@ -210,7 +232,7 @@ build_test_apps_bimap_example:
 build_test_apps_bimap_test:
   extends:
     - .build_examples_template
-    - .build_general_idf_release_image
+    - .build_general_idf_release_version
     - .rules:build:test_apps_bimap_test
   variables:
     EXAMPLE_DIR: test_apps/bimap/test

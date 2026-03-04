@@ -577,6 +577,7 @@ BOOST_AUTO_TEST_CASE(test_shared_lock)
         lk.timed_lock(boost::get_system_time());
         BOOST_CHECK(dummy.shared_timed_locked_absolute);
     }).join();
+    common_delay();
 }
 
 //boost::unit_test::test_suite* init_unit_test_suite(int, char*[])

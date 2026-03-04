@@ -1,22 +1,8 @@
 variables:
-  DOCKER_TARGET_TEST_v5_1_ENV_IMAGE: "$CI_DOCKER_REGISTRY/target-test-env-v5.1:1"
-
-.idf_target_version_matrix: &idf_target_version_matrix
-  - IDF_TARGET: esp32s3
-    IDF_VERSION: "5.3"
-    ENV_TAG: "generic"
-  - IDF_TARGET: esp32s3
-    IDF_VERSION: "5.4"
-    ENV_TAG: "generic"
-  - IDF_TARGET: esp32s3
-    IDF_VERSION: "5.5"
-    ENV_TAG: "generic"
-  # Not supported yet
-  # - IDF_TARGET: esp32p4
-  #   IDF_VERSION: "5.4"
+  DOCKER_TARGET_TEST_v5_5_ENV_IMAGE: "${CI_DOCKER_REGISTRY}/target-test-env-v5.5:2"
 
 .test_template: &test_template
-  image: DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   stage: target_test
   timeout: 4 hour
   variables:
@@ -47,6 +33,25 @@ variables:
     - pip install -r .gitlab/requirements/requirement.pytest.txt
     - pytest ${TEST_FOLDER} --target ${TEST_TARGET} --env ${TEST_ENV} --junitxml=XUNIT_RESULT.xml
 
+.idf_target_version_general_matrix: &idf_target_version_general_matrix
+  - IDF_TARGET: esp32s3
+    IDF_VERSION: "5.5"
+    ENV_TAG: "generic"
+  - IDF_TARGET: esp32p4
+    IDF_VERSION: "5.5"
+    ENV_TAG: "generic,eco4"
+
+.idf_target_version_with_psram_matrix: &idf_target_version_with_psram_matrix
+  - IDF_TARGET: esp32s3
+    IDF_VERSION: "5.5"
+    ENV_TAG: "generic"
+  - IDF_TARGET: esp32s3
+    IDF_VERSION: "5.5"
+    ENV_TAG: "generic,octal-psram"
+  - IDF_TARGET: esp32p4
+    IDF_VERSION: "5.5"
+    ENV_TAG: "generic,eco4"
+
 #
 # Test apps: signals2
 #
@@ -60,11 +65,11 @@ components_test_signals2_example:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/signals2/example
@@ -79,11 +84,11 @@ components_test_signals2_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/signals2/test
@@ -102,11 +107,11 @@ components_test_thread_example:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_with_psram_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/thread/example
@@ -121,11 +126,11 @@ components_test_thread_test_common:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_with_psram_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/thread/test_common
@@ -140,11 +145,11 @@ components_test_thread_test_more:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_with_psram_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/thread/test_more
@@ -163,11 +168,11 @@ components_test_graph_example:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/graph/example
@@ -186,11 +191,11 @@ components_test_array_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/array/test
@@ -209,11 +214,11 @@ components_test_align_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/align/test
@@ -232,11 +237,11 @@ components_test_format_example:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/format/example
@@ -251,11 +256,11 @@ components_test_format_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/format/test
@@ -274,11 +279,11 @@ components_test_algorithm_example:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/algorithm/example
@@ -293,11 +298,11 @@ components_test_algorithm_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/algorithm/test
@@ -316,11 +321,11 @@ components_test_assign_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/assign/test
@@ -339,11 +344,11 @@ components_test_bimap_example:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/bimap/example
@@ -358,11 +363,11 @@ components_test_bimap_test:
       artifacts: true
       optional: true
   parallel:
-    matrix: *idf_target_version_matrix
+    matrix: *idf_target_version_general_matrix
   tags:
     - ${IDF_TARGET}
     - ${ENV_TAG}
-  image: $DOCKER_TARGET_TEST_v5_1_ENV_IMAGE
+  image: ${DOCKER_TARGET_TEST_v5_5_ENV_IMAGE}
   variables:
     TEST_TARGET: ${IDF_TARGET}
     TEST_FOLDER: test_apps/bimap/test

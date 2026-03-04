@@ -42,4 +42,5 @@ BOOST_AUTO_TEST_CASE(sync/mutual_exclusion/recursive_timed_mutex, native_handle_
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

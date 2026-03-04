@@ -43,6 +43,7 @@ BOOST_AUTO_TEST_CASE(sync/futures/future, copy_ctor_fail)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }
 
 #include "../../../remove_error_code_unused_warning.hpp"

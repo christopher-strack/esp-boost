@@ -28,6 +28,7 @@ BOOST_AUTO_TEST_CASE(test_thread_move_from_lvalue_on_construction)
         BOOST_CHECK(src.get_id()==boost::thread::id());
         dest.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_thread_move_from_lvalue_on_assignment)
@@ -42,6 +43,7 @@ BOOST_AUTO_TEST_CASE(test_thread_move_from_lvalue_on_assignment)
         BOOST_CHECK(src.get_id()==boost::thread::id());
         dest.join();
     }).join();
+    common_delay();
 }
 
 boost::thread start_thread()
@@ -56,6 +58,7 @@ BOOST_AUTO_TEST_CASE(test_thread_move_from_rvalue_on_construction)
         BOOST_CHECK(x.get_id()!=boost::thread::id());
         x.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_thread_move_from_rvalue_using_explicit_move)
@@ -66,6 +69,7 @@ BOOST_AUTO_TEST_CASE(test_thread_move_from_rvalue_using_explicit_move)
         BOOST_CHECK(x.get_id()!=boost::thread::id());
         x.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_unique_lock_move_from_lvalue_on_construction)

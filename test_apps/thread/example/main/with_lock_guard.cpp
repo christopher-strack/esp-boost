@@ -64,4 +64,5 @@ BOOST_AUTO_TEST_CASE(with_lock_guard)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

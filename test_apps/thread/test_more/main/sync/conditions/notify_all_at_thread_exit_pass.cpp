@@ -57,4 +57,5 @@ BOOST_AUTO_TEST_CASE(sync/conditions/notify_all_at_thread_exit, notify_all_at_th
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

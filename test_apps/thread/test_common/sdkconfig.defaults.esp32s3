@@ -1,2 +1,2 @@
-CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+# This configuration option must be enabled, otherwise some test cases may fail to run
 CONFIG_COMPILER_OPTIMIZATION_PERF=y

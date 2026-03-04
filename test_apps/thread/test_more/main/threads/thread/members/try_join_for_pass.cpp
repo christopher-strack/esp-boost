@@ -174,4 +174,5 @@ BOOST_AUTO_TEST_CASE(threads/thread/members, try_join_for_pass)
   std::thread([&]() {
     TEST_ASSERT(test_main() == 0);
   }).join();
+  common_delay();
 }

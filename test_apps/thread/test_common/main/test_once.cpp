@@ -72,6 +72,7 @@ BOOST_AUTO_TEST_CASE(test_call_once)
 
         BOOST_CHECK_EQUAL(var_to_init,1);
     }).join();
+    common_delay();
 }
 
 int var_to_init_with_functor=0;
@@ -133,6 +134,7 @@ BOOST_AUTO_TEST_CASE(test_call_once_arbitrary_functor)
 
         BOOST_CHECK_EQUAL(var_to_init_with_functor,1);
     }).join();
+    common_delay();
 }
 
 
@@ -197,6 +199,7 @@ BOOST_AUTO_TEST_CASE(test_call_once_retried_on_exception)
         BOOST_CHECK_EQUAL(throw_before_third_pass::pass_counter,3u);
         BOOST_CHECK_EQUAL(exception_counter,2u);
     }).join();
+    common_delay();
 }
 
 

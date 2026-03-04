@@ -59,7 +59,7 @@ int getpagesize() {
     return 1;
 }
 
-#if CONFIG_BOOST_THREAD_ENABLED
+#if CONFIG_BOOST_ASIO_ENABLED
 /**
  * @brief Virtual pipe implementation using FreeRTOS queue
  *
@@ -358,7 +358,7 @@ extern "C" int __wrap_fcntl(int fd, int cmd, ...) {
             return -1;
     }
 }
-#endif // CONFIG_BOOST_THREAD_ENABLED
+#endif // CONFIG_BOOST_ASIO_ENABLED
 
 #if !CONFIG_LWIP_NETIF_API
 /**

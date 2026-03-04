@@ -166,4 +166,5 @@ BOOST_AUTO_TEST_CASE(make_future)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

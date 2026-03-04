@@ -756,4 +756,5 @@ BOOST_AUTO_TEST_CASE(shared_mutex)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

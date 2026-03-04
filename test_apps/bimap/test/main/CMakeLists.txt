@@ -4,6 +4,7 @@ file(GLOB_RECURSE CPP_SRCS "*.cpp")
 idf_component_register(
     SRCS ${C_SRCS} ${CPP_SRCS}
     INCLUDE_DIRS .
+    PRIV_REQUIRES common_components
     WHOLE_ARCHIVE
 )
 
@@ -15,4 +16,5 @@ target_compile_options(${COMPONENT_LIB}
         -Wno-error=maybe-uninitialized -Wno-maybe-uninitialized
         -Wno-sized-deallocation
         -Wno-error=mismatched-new-delete -Wno-mismatched-new-delete
+        -Wno-deprecated-copy
 )

@@ -368,4 +368,5 @@ BOOST_AUTO_TEST_CASE(sync/futures/when_all, iterators_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    boost::this_thread::sleep_for(boost::chrono::seconds(5));
 }

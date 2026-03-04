@@ -101,4 +101,5 @@ BOOST_AUTO_TEST_CASE(threads/this_thread/sleep_until, sleep_until_pass)
   std::thread([&]() {
     TEST_ASSERT(test_main() == 0);
   }).join();
+  common_delay();
 }

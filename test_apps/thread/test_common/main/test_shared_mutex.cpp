@@ -72,6 +72,7 @@ BOOST_AUTO_TEST_CASE(test_multiple_readers)
 
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_running,number_of_threads);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_only_one_writer_permitted)
@@ -118,6 +119,7 @@ BOOST_AUTO_TEST_CASE(test_only_one_writer_permitted)
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,unblocked_count,number_of_threads);
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_running,1u);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_reader_blocks_writer)
@@ -168,6 +170,7 @@ BOOST_AUTO_TEST_CASE(test_reader_blocks_writer)
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,unblocked_count,2U);
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_running,1u);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_unlocking_writer_unblocks_all_readers)
@@ -223,6 +226,7 @@ BOOST_AUTO_TEST_CASE(test_unlocking_writer_unblocks_all_readers)
 
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_running,reader_count);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_unlocking_last_reader_only_unblocks_one_writer)
@@ -296,4 +300,5 @@ BOOST_AUTO_TEST_CASE(test_unlocking_last_reader_only_unblocks_one_writer)
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_readers,reader_count);
         CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_writers,1u);
     }).join();
+    common_delay();
 }
