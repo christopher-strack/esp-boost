@@ -217,9 +217,12 @@ void do_test_tss()
 
 BOOST_AUTO_TEST_CASE(test_tss)
 {
+    /* esp32: increase stack size to avoid stack overflow */
+    common_set_pthread_config("test_tss", -1, 10 * 1024, 5, true, true);
     std::thread([]{
         timed_test(&do_test_tss, 2);
     }).join();
+    common_reset_pthread_config();
 }
 
 
@@ -346,6 +349,7 @@ BOOST_AUTO_TEST_CASE(test_tss_void_with_custom_cleanup)
     std::thread([]{
         timed_test(&do_test_tss_void_with_custom_cleanup, 2);
     }).join();
+    common_delay();
 }
 
 
@@ -390,6 +394,7 @@ BOOST_AUTO_TEST_CASE(test_tss_with_custom_cleanup)
     std::thread([]{
         timed_test(&do_test_tss_with_custom_cleanup, 2);
     }).join();
+    common_delay();
 }
 
 Dummy* tss_object=new Dummy;
@@ -469,6 +474,7 @@ BOOST_AUTO_TEST_CASE(test_tss_does_no_cleanup_after_release)
     std::thread([]{
         timed_test(&do_test_tss_does_no_cleanup_after_release, 2);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_tss_does_no_cleanup_with_null_cleanup_function)
@@ -476,6 +482,7 @@ BOOST_AUTO_TEST_CASE(test_tss_does_no_cleanup_with_null_cleanup_function)
     std::thread([]{
         timed_test(&do_test_tss_does_no_cleanup_with_null_cleanup_function, 2);
     }).join();
+    common_delay();
 }
 
 void thread_with_local_tss_ptr()
@@ -497,6 +504,7 @@ BOOST_AUTO_TEST_CASE(test_tss_does_not_call_cleanup_after_ptr_destroyed)
         t.join();
         BOOST_CHECK(!tss_cleanup_called);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_tss_cleanup_not_called_for_null_pointer)
@@ -511,6 +519,7 @@ BOOST_AUTO_TEST_CASE(test_tss_cleanup_not_called_for_null_pointer)
         local_tss.reset(new Dummy);
         BOOST_CHECK(!tss_cleanup_called);
     }).join();
+    common_delay();
 }
 
 //BOOST_AUTO_TEST_CASE(test_tss_at_the_same_adress)

@@ -101,6 +101,7 @@ BOOST_AUTO_TEST_CASE(test_only_one_upgrade_lock_permitted)
     CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_running,1u);
 
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_can_lock_upgrade_if_currently_locked_shared)
@@ -152,6 +153,7 @@ BOOST_AUTO_TEST_CASE(test_can_lock_upgrade_if_currently_locked_shared)
     CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,unblocked_count,reader_count+1);
     CHECK_LOCKED_VALUE_EQUAL(unblocked_count_mutex,max_simultaneous_running,reader_count+1);
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_can_lock_upgrade_to_unique_if_currently_locked_upgrade)
@@ -162,6 +164,7 @@ BOOST_AUTO_TEST_CASE(test_can_lock_upgrade_to_unique_if_currently_locked_upgrade
         boost::upgrade_to_unique_lock<boost::shared_mutex> ul(l);
         BOOST_CHECK(ul.owns_lock());
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_other_thread_has_write_lock_try_lock_shared_returns_false)
@@ -186,6 +189,7 @@ BOOST_AUTO_TEST_CASE(test_if_other_thread_has_write_lock_try_lock_shared_returns
         finish_lock.unlock();
         writer.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_other_thread_has_write_lock_try_lock_upgrade_returns_false)
@@ -210,6 +214,7 @@ BOOST_AUTO_TEST_CASE(test_if_other_thread_has_write_lock_try_lock_upgrade_return
     finish_lock.unlock();
     writer.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_no_thread_has_lock_try_lock_shared_returns_true)
@@ -223,6 +228,7 @@ BOOST_AUTO_TEST_CASE(test_if_no_thread_has_lock_try_lock_shared_returns_true)
         rw_mutex.unlock_shared();
     }
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_no_thread_has_lock_try_lock_upgrade_returns_true)
@@ -236,6 +242,7 @@ BOOST_AUTO_TEST_CASE(test_if_no_thread_has_lock_try_lock_upgrade_returns_true)
         rw_mutex.unlock_upgrade();
     }
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_other_thread_has_shared_lock_try_lock_shared_returns_true)
@@ -260,6 +267,7 @@ BOOST_AUTO_TEST_CASE(test_if_other_thread_has_shared_lock_try_lock_shared_return
     finish_lock.unlock();
     writer.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_other_thread_has_shared_lock_try_lock_upgrade_returns_true)
@@ -284,6 +292,7 @@ BOOST_AUTO_TEST_CASE(test_if_other_thread_has_shared_lock_try_lock_upgrade_retur
     finish_lock.unlock();
     writer.join();
     }).join();
+    common_delay();
 }
 
 BOOST_AUTO_TEST_CASE(test_if_other_thread_has_upgrade_lock_try_lock_upgrade_returns_false)
@@ -308,6 +317,7 @@ BOOST_AUTO_TEST_CASE(test_if_other_thread_has_upgrade_lock_try_lock_upgrade_retu
     finish_lock.unlock();
     writer.join();
     }).join();
+    common_delay();
 }
 
 

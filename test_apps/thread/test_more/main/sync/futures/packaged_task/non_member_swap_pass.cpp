@@ -71,4 +71,5 @@ BOOST_AUTO_TEST_CASE(sync/futures/packaged_task, non_member_swap_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

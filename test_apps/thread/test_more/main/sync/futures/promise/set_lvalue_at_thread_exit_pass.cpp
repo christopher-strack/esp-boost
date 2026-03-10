@@ -55,4 +55,5 @@ BOOST_AUTO_TEST_CASE(sync/futures/promise, set_lvalue_at_thread_exit_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

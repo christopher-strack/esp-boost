@@ -2403,7 +2403,7 @@ static int test_main()
 
 BOOST_AUTO_TEST_CASE(test_time_jumps)
 {
-    common_set_pthread_config("test_time_jumps", -1, 1024 * 10, 5);
+    common_set_pthread_config("test_time_jumps", -1, 15 * 1024, 5, true, true);
     std::thread([&]() {
         boost::thread t([&]() {
             try {

@@ -6,7 +6,7 @@
 
 ## 概述
 
-esp-boost 是 Espressif 基于 [Boost](https://github.com/boostorg/boost) 移植的 C++ 库，用于 ESP 系列 SoCs（ESP32、ESP32-S3、ESP32-P4 等）开发 C++ 应用。
+esp-boost 是 Espressif 基于 [Boost](https://github.com/boostorg/boost) 移植的 C++ 库，用于 ESP 系列 SoCs（ESP32-C5、ESP32-S3、ESP32-P4 等）开发 C++ 应用。
 
 > [!NOTE]
 > - esp-boost 移植的 Boost 库官方版本为 `1.87.0`。
@@ -34,7 +34,7 @@ esp-boost 是 Espressif 基于 [Boost](https://github.com/boostorg/boost) 移植
 
 |                     **SDK**                     | **版本要求** |
 | ----------------------------------------------- | ------------ |
-| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.3       |
+| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5,<6.0  |
 
 > [!NOTE]
 > * SDK 的安装方法请参阅 [ESP-IDF 编程指南 - 安装](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html#get-started-how-to-get-esp-idf)
@@ -81,9 +81,8 @@ esp-boost 已上传到 [Espressif 组件库](https://components.espressif.com/)�
 | array           | ✅️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/array/index.html)           | ❌                                                                                                              | [内部](./test_apps/array/test/) / [官方](https://github.com/boostorg/array/tree/boost-1.87.0/test)                                                                                        |
 | format          | ✅️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/format/doc/format.html)        | [内部](./test_apps/format/example/) / [官方](https://github.com/boostorg/format/tree/boost-1.87.0/example) | [内部](./test_apps/format/test/) / [官方](https://github.com/boostorg/format/tree/boost-1.87.0/test)                                                |
 | graph           | ✅️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/graph/index.html)           | [内部](./test_apps/graph/example/) / [官方](https://github.com/boostorg/graph/tree/boost-1.87.0/example)       | [官方](https://github.com/boostorg/graph/tree/boost-1.87.0/test)                                                                                        |
-| assert          | ⚠️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/assert/index.html)          | ❌                                                                                                              | [官方](https://github.com/boostorg/assert/tree/boost-1.87.0/test)    
+| assert          | ⚠️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/assert/index.html)          | ❌                                                                                                              | [官方](https://github.com/boostorg/assert/tree/boost-1.87.0/test)
 | assign          | ✅️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/assign/doc/index.html)          | ❌                                                                                                              | [内部](./test_apps/assign/test/) / [官方](https://github.com/boostorg/assign/tree/boost-1.87.0/test)                                                                                     |
-| atomic          | ⚠️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/atomic/index.html)          | ❌                                                                                                              | [官方](https://github.com/boostorg/atomic/tree/boost-1.87.0/test)                                                                                       |
 | bimap           | ✅️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/bimap/index.html)           | [内部](./test_apps/bimap/example/) / [官方](https://github.com/boostorg/bimap/tree/boost-1.87.0/example)                                            | [内部](./test_apps/bimap/test/) / [官方](https://github.com/boostorg/bimap/tree/boost-1.87.0/test)                                                                                        |
 | bind            | ⚠️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/bind/index.html)            | ❌                                                                                                              | [官方](https://github.com/boostorg/bind/tree/boost-1.87.0/test)                                                                                         |
 | chrono          | ⚠️       | [链接](https://www.boost.org/doc/libs/1_87_0/libs/chrono/index.html)          | [官方](https://github.com/boostorg/chrono/tree/boost-1.87.0/example)                                           | [官方](https://github.com/boostorg/chrono/tree/boost-1.87.0/test)                                                                                       |

@@ -4,11 +4,12 @@ file(GLOB_RECURSE CPP_SRCS "*.cpp")
 idf_component_register(
     SRCS ${C_SRCS} ${CPP_SRCS}
     INCLUDE_DIRS .
+    PRIV_REQUIRES common_components
     WHOLE_ARCHIVE
 )
 
 target_compile_options(${COMPONENT_LIB}
-    PRIVATE 
+    PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:
         -Wno-unused-but-set-variable -Wno-unused-variable
         -Wno-catch-value -Wno-error=catch-value=

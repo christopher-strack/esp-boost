@@ -1,5 +1,23 @@
 # ChangeLog
 
+## v0.5.0 - 2026-03-10
+
+### Breaking Changes:
+
+* break(repo): upgrade esp-idf dependency to `>= v5.5`
+* bread(Kconfig): disable most libs by default
+
+### Enhancements:
+
+* feat(CI): update build and target tests
+* feat(config): define `BOOST_THREAD_DONT_PROVIDE_PROMISE_LAZY` by default
+* feat(test_apps): update sdkconfig and pytest scripts
+
+### Bugfixes:
+
+* fix(config): use `CONFIG_BOOST_ASIO_ENABLED` instead of `CONFIG_BOOST_THREAD_ENABLED` for `pipe` function
+* chore(libs): remove boost.atomic from supported libraries list
+
 ## v0.4.2 - 2025-12-5
 
 ### Enhancements:

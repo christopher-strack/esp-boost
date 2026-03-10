@@ -329,4 +329,6 @@ BOOST_AUTO_TEST_CASE(sync/futures/when_any, variadic_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    /* esp32: delay to avoid "memory leak" error */
+    boost::this_thread::sleep_for(boost::chrono::seconds(5));
 }

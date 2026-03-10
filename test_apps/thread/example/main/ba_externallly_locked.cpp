@@ -130,4 +130,5 @@ BOOST_AUTO_TEST_CASE(ba_externallly_locked)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

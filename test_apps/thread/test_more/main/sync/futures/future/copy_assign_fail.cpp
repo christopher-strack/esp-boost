@@ -45,4 +45,5 @@ BOOST_AUTO_TEST_CASE(sync/futures/future, copy_assign_fail)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

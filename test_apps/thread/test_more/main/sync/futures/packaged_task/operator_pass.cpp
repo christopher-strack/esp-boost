@@ -224,4 +224,5 @@ BOOST_AUTO_TEST_CASE(sync/futures/packaged_task, operator_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

@@ -6,7 +6,7 @@
 
 ## Overview
 
-esp-boost is a C++ library ported by Espressif based on [Boost](https://github.com/boostorg/boost), designed for developing C++ applications on ESP series SoCs (ESP32, ESP32-S3, ESP32-P4, etc.).
+esp-boost is a C++ library ported by Espressif based on [Boost](https://github.com/boostorg/boost), designed for developing C++ applications on ESP series SoCs (ESP32-C5, ESP32-S3, ESP32-P4, etc.).
 
 > [!NOTE]
 > - esp-boost is ported from the official Boost library version `1.87.0`.
@@ -34,7 +34,7 @@ Before using this library, please ensure you have installed the SDK that meets t
 
 |                     **SDK**                     | **Version Required** |
 | ----------------------------------------------- | -------------------- |
-| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.3               |
+| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5,<6.0          |
 
 > [!NOTE]
 > * For SDK installation, please refer to [ESP-IDF Programming Guide - Installation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#get-started-how-to-get-esp-idf)
@@ -84,7 +84,6 @@ For detailed information, please refer to [Espressif Documentation - IDF Compone
 | asio            | ⚠️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/asio/index.html)           | [Official](https://github.com/boostorg/asio/tree/boost-1.87.0/example)                                                                                                              | [Official](https://github.com/boostorg/asio/tree/boost-1.87.0/test)                                                                                        |
 | assert          | ⚠️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/assert/index.html)          | ❌                                                                                                              | [Official](https://github.com/boostorg/assert/tree/boost-1.87.0/test)                                                                                       |
 | assign          | ✅️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/assign/doc/index.html)          | ❌                                                                                                              | [Internal](./test_apps/assign/test/) / [Official](https://github.com/boostorg/assign/tree/boost-1.87.0/test)                                                                                     |
-| atomic          | ⚠️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/atomic/index.html)          | ❌                                                                                                              | [Official](https://github.com/boostorg/atomic/tree/boost-1.87.0/test)                                                                                       |
 | bimap           | ✅️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/bimap/index.html)           | [Internal](./test_apps/bimap/example/) / [Official](https://github.com/boostorg/bimap/tree/boost-1.87.0/example)                                            | [Internal](./test_apps/bimap/test/) / [Official](https://github.com/boostorg/bimap/tree/boost-1.87.0/test)                                                                                        |
 | bind            | ⚠️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/bind/index.html)            | ❌                                                                                                              | [Official](https://github.com/boostorg/bind/tree/boost-1.87.0/test)                                                                                         |
 | chrono          | ⚠️       | [Link](https://www.boost.org/doc/libs/1_87_0/libs/chrono/index.html)          | [Official](https://github.com/boostorg/chrono/tree/boost-1.87.0/example)                                           | [Official](https://github.com/boostorg/chrono/tree/boost-1.87.0/test)                                                                                       |

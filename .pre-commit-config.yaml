@@ -77,13 +77,13 @@ repos:
     hooks:
       - id: check-executables
         name: Check File Permissions
-        entry: ./tools/check_executables.py --action executables
+        entry: .gitlab/tools/check_executables.py --action executables
         language: python
         types: [executable]
         exclude: '\.pre-commit/.+'
       - id: check-executable-list
         name: Validate executable-list.txt
-        entry: ./tools/check_executables.py --action list
+        entry: .gitlab/tools/check_executables.py --action list
         language: python
         pass_filenames: false
         always_run: true

@@ -301,4 +301,5 @@ BOOST_AUTO_TEST_CASE(experimental/parallel/v2, task_region_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

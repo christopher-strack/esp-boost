@@ -300,4 +300,5 @@ BOOST_AUTO_TEST_CASE(sync/mutual_exclusion/once/call_once, call_once_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

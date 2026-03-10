@@ -257,4 +257,5 @@ BOOST_AUTO_TEST_CASE(perf_condition_variable)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

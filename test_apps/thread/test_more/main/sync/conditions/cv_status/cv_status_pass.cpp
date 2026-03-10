@@ -66,4 +66,5 @@ BOOST_AUTO_TEST_CASE(sync/conditions/cv_status, cv_status_pass)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

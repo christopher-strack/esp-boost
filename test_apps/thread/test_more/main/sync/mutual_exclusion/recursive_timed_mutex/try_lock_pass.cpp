@@ -93,10 +93,14 @@ static int test_main()
 
 #include "common.hpp"
 
+/* esp32s3: The test is not applicable for ESP32S3 with PSRAM enabled */
+#if !defined(CONFIG_IDF_TARGET_ESP32S3) && !defined(CONFIG_SPIRAM)
 BOOST_AUTO_TEST_CASE(sync/mutual_exclusion/recursive_timed_mutex, try_lock_pass)
 {
     common_init();
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }
+#endif

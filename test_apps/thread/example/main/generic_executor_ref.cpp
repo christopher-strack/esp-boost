@@ -174,4 +174,5 @@ BOOST_AUTO_TEST_CASE(generic_executor_ref)
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }

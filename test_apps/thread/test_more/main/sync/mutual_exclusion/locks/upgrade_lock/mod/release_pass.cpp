@@ -43,6 +43,10 @@ int shared_mutex::unlock_count = 0;
 
 static int test_main()
 {
+  /* esp32: reset lock and unlock count */
+  shared_mutex::lock_count = 0;
+  shared_mutex::unlock_count = 0;
+
   boost::upgrade_lock<shared_mutex> lk(m);
   BOOST_TEST(lk.mutex() == &m);
   BOOST_TEST(lk.owns_lock() == true);

@@ -71,4 +71,5 @@ BOOST_AUTO_TEST_CASE(sync/mutual_exclusion/locks/shared_lock, move_ctor_unique_l
     std::thread([&]() {
         TEST_ASSERT(test_main() == 0);
     }).join();
+    common_delay();
 }
