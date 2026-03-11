@@ -1,7 +1,9 @@
 #include <time.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#if CONFIG_BOOST_ASIO_ENABLED
+#   include <sys/socket.h>
+#   include <netinet/in.h>
+#   include <arpa/inet.h>
+#endif
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdarg.h>

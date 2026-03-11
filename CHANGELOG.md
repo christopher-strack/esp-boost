@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.5.1 - 2026-03-11
+
+### Bugfixes:
+
+* fix(config): fix build error when lwip is not enabled
+
 ## v0.5.0 - 2026-03-10
 
 ### Breaking Changes:
