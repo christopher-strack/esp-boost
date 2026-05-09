@@ -29,23 +29,22 @@
 # pragma warning(disable: 4702) // unreachable code
 #endif
 
-struct A
+struct SetValueConstPassA
 {
-  A()
+  SetValueConstPassA()
   {
   }
-  A(const A&)
+  SetValueConstPassA(const SetValueConstPassA&)
   {
     throw 10;
   }
 #if !defined(BOOST_NO_CXX11_DEFAULTED_FUNCTIONS)
-  A& operator= (const A&) = default;
+  SetValueConstPassA& operator= (const SetValueConstPassA&) = default;
 #endif
 };
 
 static int test_main()
 {
-
   {
     typedef int T;
     T i = 3;
@@ -94,7 +93,7 @@ static int test_main()
     }
   }
   {
-    typedef A T;
+    typedef SetValueConstPassA T;
     T i;
     boost::promise<T> p;
     boost::future<T> f = p.get_future();

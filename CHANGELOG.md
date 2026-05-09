@@ -1,5 +1,18 @@
 # ChangeLog
 
+## v0.6.0 - 2026-05-12
+
+### Enhancements:
+
+* feat(repo): support ESP-IDF v6 by removing the `<6.0` dependency limit
+* feat(gitlab): update CI structure for test apps
+* feat(test_apps): update test apps for ESP-IDF v6 targets
+
+### Bugfixes:
+
+* fix(thread): avoid `shared_future` get hang after readiness on ESP targets
+* fix(thread): fix Boost.Thread move-assignment typo exposed by stricter diagnostics
+
 ## v0.5.1 - 2026-03-11
 
 ### Bugfixes:

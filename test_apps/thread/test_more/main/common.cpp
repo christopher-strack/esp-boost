@@ -35,8 +35,8 @@ void operator delete(void* p) BOOST_NOEXCEPT_OR_NOTHROW
 }
 
 void common_init() {
-#if CONFIG_IDF_TARGET_ESP32P4
-  common_set_pthread_config(5 * 1024, true);
+#if CONFIG_IDF_TARGET_ESP32P4 || CONFIG_IDF_TARGET_ESP32S31
+  common_set_pthread_config(6 * 1024, true);
 #else
   common_set_pthread_config(4 * 1024, true);
 #endif

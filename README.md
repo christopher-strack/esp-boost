@@ -34,7 +34,7 @@ Before using this library, please ensure you have installed the SDK that meets t
 
 |                     **SDK**                     | **Version Required** |
 | ----------------------------------------------- | -------------------- |
-| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5,<6.0          |
+| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5          |
 
 > [!NOTE]
 > * For SDK installation, please refer to [ESP-IDF Programming Guide - Installation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#get-started-how-to-get-esp-idf)

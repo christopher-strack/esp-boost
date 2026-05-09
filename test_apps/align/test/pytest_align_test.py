@@ -137,9 +137,9 @@ def test(dut: Dut)-> None:
 @pytest.mark.target('esp32s3')
 @pytest.mark.env('generic')
 @pytest.mark.parametrize(
-    'config',
+    'target, config',
     [
-        'defaults',
+        ('esp32s3', 'defaults'),
     ],
 )
 @pytest.mark.timeout(TOTAL_TIMEOUT_S)
@@ -150,9 +150,9 @@ def test_esp32s3(dut: Dut)-> None:
 @pytest.mark.target('esp32p4')
 @pytest.mark.env('generic,eco4')
 @pytest.mark.parametrize(
-    'config',
+    'target, config',
     [
-        'defaults',
+        ('esp32p4', 'defaults'),
     ],
 )
 @pytest.mark.timeout(TOTAL_TIMEOUT_S)

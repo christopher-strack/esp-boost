@@ -18,3 +18,8 @@ target_compile_options(${COMPONENT_LIB}
         -Wno-sized-deallocation
         -Wno-error=mismatched-new-delete -Wno-mismatched-new-delete
 )
+
+target_compile_definitions(${COMPONENT_LIB}
+    PRIVATE
+        BOOST_THREAD_ENABLE_GET_ID
+)

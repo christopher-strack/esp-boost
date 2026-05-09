@@ -22,26 +22,27 @@
 //#include <boost/thread/mutex.hpp>
 #include <boost/detail/lightweight_test.hpp>
 
-static bool unlock_called = false;
+static bool unique_lock_unlock_pass_unlock_called = false;
 
-struct mutex
+struct UniqueLockUnlockPassMutex
 {
   void lock()
   {
   }
   void unlock()
   {
-    unlock_called = true;
+    unique_lock_unlock_pass_unlock_called = true;
   }
 };
 
-static mutex m;
+static UniqueLockUnlockPassMutex m;
 
 static int test_main()
 {
-  boost::unique_lock<mutex> lk(m);
+  unique_lock_unlock_pass_unlock_called = false;
+  boost::unique_lock<UniqueLockUnlockPassMutex> lk(m);
   lk.unlock();
-  BOOST_TEST(unlock_called == true);
+  BOOST_TEST(unique_lock_unlock_pass_unlock_called == true);
   BOOST_TEST(lk.owns_lock() == false);
   try
   {

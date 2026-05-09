@@ -116,7 +116,7 @@ if(CONFIG_BOOST_THREAD_ENABLED)
 endif()
 
 set(COMPONENT_INCLUDE_DIRS ${COMPONENT_SRC_DIR})
-set(COMPONENT_PUBLIC_REQUIRES pthread)
+set(COMPONENT_PUBLIC_REQUIRES pthread lwip)
 
 #
 # Register component
@@ -128,6 +128,10 @@ idf_component_register(${COMPONENT_LIB}
         ${COMPONENT_INCLUDE_DIRS}
     REQUIRES
         ${COMPONENT_PUBLIC_REQUIRES}
+)
+
+target_compile_options(${COMPONENT_LIB} PUBLIC
+    $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++23>
 )
 
 # esp-boost must be building from ESP platform

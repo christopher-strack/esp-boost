@@ -9,6 +9,7 @@
     - if: IDF_TARGET in ["esp32s3", "esp32p4", "esp32c5"]
 
 # Test apps
+test_apps/asio: *default_enable  # asio
 test_apps/signals2: *default_enable  # signals2
 test_apps/thread: *default_enable  # thread
 test_apps/graph: *default_enable  # graph
