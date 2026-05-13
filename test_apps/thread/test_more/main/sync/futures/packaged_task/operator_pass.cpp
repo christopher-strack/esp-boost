@@ -44,41 +44,45 @@
 #define BOOST_THREAD_DETAIL_SIGNATURE_2 double
 #define BOOST_THREAD_DETAIL_SIGNATURE_2_RES 5
 #endif
-class E : public std::exception
+class OperatorPassE : public std::exception
 {
 public:
   long data;
-  explicit E(long i) :
+  explicit OperatorPassE(long i) :
     data(i)
   {
   }
 
   const char* what() const throw() { return ""; }
 
-  ~E() throw() {}
+  ~OperatorPassE() throw() {}
 };
 
-class A
+class OperatorPassA
 {
   long data_;
 
 public:
-  explicit A(long i) :
+  explicit OperatorPassA(long i) :
     data_(i)
   {
   }
 
   long operator()() const
   {
-    if (data_ == 0) BOOST_THROW_EXCEPTION(E(6));
+    if (data_ == 0) {
+      BOOST_THROW_EXCEPTION(OperatorPassE(6));
+    }
     return data_;
   }
   long operator()(long i, long j) const
   {
-    if (j == 'z') BOOST_THROW_EXCEPTION(E(6));
+    if (j == 'z') {
+      BOOST_THROW_EXCEPTION(OperatorPassE(6));
+    }
     return data_ + i + j;
   }
-  ~A() {}
+  ~OperatorPassA() {}
 };
 
 static void func0(boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p)
@@ -141,7 +145,7 @@ static void func3(boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p)
 static int test_main()
 {
   {
-    boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p(A(5));
+    boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p(OperatorPassA(5));
     boost::future<double> f = BOOST_THREAD_MAKE_RV_REF(p.get_future());
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
     boost::thread(func0, boost::move(p)).detach();
@@ -151,7 +155,7 @@ static int test_main()
     //BOOST_TEST(f.get() == 5.0);
   }
   {
-    boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p(A(0));
+    boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p(OperatorPassA(0));
     boost::future<double> f = BOOST_THREAD_MAKE_RV_REF(p.get_future());
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
     boost::thread(func1, boost::move(p)).detach();
@@ -165,7 +169,7 @@ static int test_main()
       f.get();
       BOOST_TEST(false);
     }
-    catch (const E& e)
+    catch (const OperatorPassE& e)
     {
       BOOST_TEST(e.data == 6);
     }
@@ -175,7 +179,7 @@ static int test_main()
     }
   }
   {
-    boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p(A(5));
+    boost::packaged_task<BOOST_THREAD_DETAIL_SIGNATURE_2> p(OperatorPassA(5));
     boost::future<double> f = BOOST_THREAD_MAKE_RV_REF(p.get_future());
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
     boost::thread t(func2, boost::move(p));

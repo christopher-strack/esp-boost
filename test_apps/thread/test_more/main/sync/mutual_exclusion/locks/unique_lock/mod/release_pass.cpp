@@ -21,7 +21,7 @@
 #include <boost/thread/lock_types.hpp>
 #include <boost/detail/lightweight_test.hpp>
 
-struct mutex
+struct UniqueLockReleasePassMutex
 {
   static int lock_count;
   static int unlock_count;
@@ -35,22 +35,24 @@ struct mutex
   }
 };
 
-static mutex m;
-int mutex::lock_count = 0;
-int mutex::unlock_count = 0;
+static UniqueLockReleasePassMutex m;
+int UniqueLockReleasePassMutex::lock_count = 0;
+int UniqueLockReleasePassMutex::unlock_count = 0;
 
 static int test_main()
 {
-  boost::unique_lock<mutex> lk(m);
+  UniqueLockReleasePassMutex::lock_count = 0;
+  UniqueLockReleasePassMutex::unlock_count = 0;
+  boost::unique_lock<UniqueLockReleasePassMutex> lk(m);
   BOOST_TEST(lk.mutex() == &m);
   BOOST_TEST(lk.owns_lock() == true);
-  BOOST_TEST(mutex::lock_count == 1);
-  BOOST_TEST(mutex::unlock_count == 0);
+  BOOST_TEST(UniqueLockReleasePassMutex::lock_count == 1);
+  BOOST_TEST(UniqueLockReleasePassMutex::unlock_count == 0);
   BOOST_TEST(lk.release() == &m);
   BOOST_TEST(lk.mutex() == 0);
   BOOST_TEST(lk.owns_lock() == false);
-  BOOST_TEST(mutex::lock_count == 1);
-  BOOST_TEST(mutex::unlock_count == 0);
+  BOOST_TEST(UniqueLockReleasePassMutex::lock_count == 1);
+  BOOST_TEST(UniqueLockReleasePassMutex::unlock_count == 0);
 
   return boost::report_errors();
 }

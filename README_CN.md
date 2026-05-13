@@ -34,7 +34,7 @@ esp-boost 是 Espressif 基于 [Boost](https://github.com/boostorg/boost) 移植
 
 |                     **SDK**                     | **版本要求** |
 | ----------------------------------------------- | ------------ |
-| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5,<6.0  |
+| [esp-idf](https://github.com/espressif/esp-idf) | >= 5.5  |
 
 > [!NOTE]
 > * SDK 的安装方法请参阅 [ESP-IDF 编程指南 - 安装](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html#get-started-how-to-get-esp-idf)

@@ -19,8 +19,6 @@
 //        bool try_join_for(const chrono::duration<Rep, Period>& rel_time);
 
 #define BOOST_THREAD_VESRION 3
-/* esp32: Enable this macro to make `join()` throw an exception when joining itself */
-#define BOOST_THREAD_ENABLE_GET_ID
 #include <boost/thread/thread_only.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/locks.hpp>

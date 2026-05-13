@@ -664,7 +664,9 @@ namespace boost
             shared_future_get_result_type get_sh()
             {
                 boost::unique_lock<boost::mutex> lk(this->mutex);
-                return this->get_sh(lk);
+                /* esp32: Avoid re-entering the virtual get_sh(lock) path here; on ESP targets it can hang after readiness. */
+                // return this->get_sh(lk);
+                return *get_storage(lk);
             }
             void set_value_deferred(source_reference_type result_)
             {
@@ -4668,7 +4670,8 @@ namespace detail
       }
       run_it& operator=(BOOST_THREAD_RV_REF(run_it) x) BOOST_NOEXCEPT {
         if (this != &x) {
-          that_=x.that;
+          /* esp32: Fix Boost.Thread typo exposed by stricter template diagnostics. */
+          that_=x.that_;
           x.that_.reset();
         }
         return *this;

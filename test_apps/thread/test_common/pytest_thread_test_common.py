@@ -137,9 +137,9 @@ def test(dut: Dut)-> None:
 @pytest.mark.target('esp32s3')
 @pytest.mark.env('generic')
 @pytest.mark.parametrize(
-    'config',
+    'target, config',
     [
-        'defaults',
+        ('esp32s3', 'defaults'),
     ],
 )
 @pytest.mark.timeout(TOTAL_TIMEOUT_S)
@@ -150,9 +150,10 @@ def test_esp32s3(dut: Dut)-> None:
 @pytest.mark.target('esp32s3')
 @pytest.mark.env('generic,octal-psram')
 @pytest.mark.parametrize(
-    'config',
+    'target, config',
     [
-        'esp32s3_octal_psram', 'esp32s3_octal_psram_xip',
+        ('esp32s3', 'esp32s3_octal_psram'),
+        ('esp32s3', 'esp32s3_octal_psram_xip'),
     ],
 )
 @pytest.mark.timeout(TOTAL_TIMEOUT_S)
@@ -163,9 +164,10 @@ def test_esp32s3_octal_psram(dut: Dut)-> None:
 @pytest.mark.target('esp32p4')
 @pytest.mark.env('generic,eco4')
 @pytest.mark.parametrize(
-    'config',
+    'target, config',
     [
-        'defaults', 'esp32p4_xip',
+        ('esp32p4', 'defaults'),
+        ('esp32p4', 'esp32p4_xip'),
     ],
 )
 @pytest.mark.timeout(TOTAL_TIMEOUT_S)

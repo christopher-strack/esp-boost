@@ -23,26 +23,27 @@
 //#include <boost/thread/shared_mutex.hpp>
 #include <boost/detail/lightweight_test.hpp>
 
-static bool unlock_called = false;
+static bool shared_lock_unlock_pass_unlock_called = false;
 
-struct shared_mutex
+struct SharedLockUnlockPassMutex
 {
   void lock_shared()
   {
   }
   void unlock_shared()
   {
-    unlock_called = true;
+    shared_lock_unlock_pass_unlock_called = true;
   }
 };
 
-static shared_mutex m;
+static SharedLockUnlockPassMutex m;
 
 static int test_main()
 {
-  boost::shared_lock<shared_mutex> lk(m);
+  shared_lock_unlock_pass_unlock_called = false;
+  boost::shared_lock<SharedLockUnlockPassMutex> lk(m);
   lk.unlock();
-  BOOST_TEST(unlock_called == true);
+  BOOST_TEST(shared_lock_unlock_pass_unlock_called == true);
   BOOST_TEST(lk.owns_lock() == false);
   try
   {
