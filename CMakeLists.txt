@@ -115,6 +115,16 @@ if(CONFIG_BOOST_THREAD_ENABLED)
     message(STATUS "Including Boost.Thread")
 endif()
 
+# Url
+if(CONFIG_BOOST_URL_ENABLED)
+    file(GLOB_RECURSE MODULE_SRCS
+        ${COMPONENT_SRC_DIR}/boost/url/src/*.cpp
+        ${COMPONENT_SRC_DIR}/boost/url/src/**/*.cpp
+    )
+    list(APPEND COMPONENT_SRC_FILES ${MODULE_SRCS})
+    message(STATUS "Including Boost.Url")
+endif()
+
 set(COMPONENT_INCLUDE_DIRS ${COMPONENT_SRC_DIR})
 set(COMPONENT_PUBLIC_REQUIRES pthread lwip sock_utils)
 
