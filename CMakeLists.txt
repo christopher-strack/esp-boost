@@ -13,6 +13,15 @@ if(CONFIG_BOOST_JSON_ENABLED)
     message(STATUS "Including Boost.Json")
 endif()
 
+# Beast
+if(CONFIG_BOOST_BEAST_ENABLED)
+    file(GLOB MODULE_SRCS
+        ${COMPONENT_SRC_DIR}/boost/beast/src/*.cpp
+    )
+    list(APPEND COMPONENT_SRC_FILES ${MODULE_SRCS})
+    message(STATUS "Including Boost.Beast")
+endif()
+
 # Chrono
 if(CONFIG_BOOST_CHRONO_ENABLED)
     file(GLOB MODULE_SRCS
@@ -143,6 +152,14 @@ idf_component_register(${COMPONENT_LIB}
 target_compile_options(${COMPONENT_LIB} PUBLIC
     $<$<COMPILE_LANGUAGE:CXX>:-std=gnu++23>
 )
+
+# Boost.Beast defaults to a header-only implementation. The component compiles
+# boost/beast/src/src.cpp instead, so every consumer must see the same choice.
+if(CONFIG_BOOST_BEAST_ENABLED)
+    target_compile_definitions(${COMPONENT_LIB} PUBLIC
+        BOOST_BEAST_SEPARATE_COMPILATION
+    )
+endif()
 
 # esp-boost must be building from ESP platform
 if (NOT ESP_PLATFORM)

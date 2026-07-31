@@ -14,6 +14,14 @@ menu "ESP Boost Configuration"
         help
             Enable the Boost.Asio library.
 
+    config BOOST_BEAST_ENABLED
+        bool "Enable Boost Beast library"
+        default n
+        select BOOST_ASIO_ENABLED
+        select BOOST_SYSTEM_ENABLED
+        help
+            Enable the Boost.Beast library. Requires Boost.Asio and Boost.System.
+
     config BOOST_CHRONO_ENABLED
         bool "Enable Boost Chrono library"
         default n
