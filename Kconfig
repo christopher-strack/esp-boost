@@ -99,4 +99,11 @@ menu "ESP Boost Configuration"
         select BOOST_SYSTEM_ENABLED
         help
             Enable the Boost.Thread library. Requires Boost.Chrono and Boost.System.
+
+    config BOOST_URL_ENABLED
+        bool "Enable Boost Url library"
+        default n
+        select BOOST_SYSTEM_ENABLED
+        help
+            Enable the Boost.Url library. Requires Boost.System.
 endmenu

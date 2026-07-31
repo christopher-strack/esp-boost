@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.7.0 - 2026-07-31
+
+### Enhancements:
+
+* feat(libs): support url
+
 ## v0.6.0 - 2026-05-12
 
 ### Enhancements:
