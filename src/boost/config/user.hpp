@@ -15,9 +15,6 @@
 
 /* esp32: Configure header files */
 
-// define this to locate a compiler config file:
-#define BOOST_COMPILER_CONFIG <boost/config/compiler/gcc.hpp>
-
 // define this to locate a stdlib config file:
 #define BOOST_STDLIB_CONFIG   <boost/config/stdlib/libstdcpp3.hpp>
 
@@ -132,4 +129,3 @@
 //
 // to ensure the correct libraries are selected at link time.
 // #define BOOST_LIB_BUILDID amd64
-
